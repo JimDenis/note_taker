@@ -91,6 +91,8 @@ app.post("/api/notes", function(req, res) {
   console.log(newNote.title);
   console.log(notes)
 
+  newNote.id = newNote.title.replace(/\s+/g, "").toLowerCase();
+
   let data = JSON.stringify(notes, null, 2);
 
   fs.writeFile('Develop/db/db.json', data, (err) => {
@@ -98,11 +100,15 @@ app.post("/api/notes", function(req, res) {
     console.log('Data written to file');
   });
 
+  
+
   // Using a RegEx Pattern to remove spaces from newCharacter
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  //newNote.title = newNote.name.replace(/\s+/g, "").toLowerCase();
-  newNote.id = newNote.title //.replace(/\s+/g, "").toLowerCase();
+  //newNote.id = newNote.title.replace(/\s+/g, "").toLowerCase();
+  //newNote.id = newNote.title //.replace(/\s+/g, "").toLowerCase();
   console.log(newNote);
+
+  res.redirect("/");
 
   //notes.push(newNote);
 
